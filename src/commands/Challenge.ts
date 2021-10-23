@@ -6,27 +6,12 @@ import { Challenger } from "../structure/Challenger";
 import { bold, sleep } from "../structure/utils";
 
 export default class extends UserCommand {
-  name = "battle";
-  description = "rpg battle";
+  name = "challenge";
+  description = "fight challengers";
 
   async exec(msg: Message) {
 
-    const mention = msg.mentions.members?.first();
     const player = await Player.fromMember(msg.member!);
-
-    if (mention) {
-      const opponent = await Player.fromMember(mention);
-      const info = opponent.show().setTitle("Your opponent");
-
-      const loading = await msg.channel.send({ embeds: [info] });
-      await sleep(6);
-      await loading.delete();
-
-      const battle = new Battle(msg, [player, opponent]);
-      await battle.run();
-
-      return;
-    }
 
     const challenger = new Challenger(player);
     const info = challenger.show().setTitle("Your opponent");
