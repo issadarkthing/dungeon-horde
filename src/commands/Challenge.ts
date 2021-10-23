@@ -12,7 +12,6 @@ export default class extends UserCommand {
   async exec(msg: Message) {
 
     const player = await Player.fromMember(msg.member!);
-
     const challenger = new Challenger(player);
     const info = challenger.show().setTitle("Your opponent");
 
