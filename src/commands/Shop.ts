@@ -1,8 +1,6 @@
 import { Message, MessageActionRow, MessageButton, MessageComponentInteraction, MessageEmbed } from "discord.js";
 import { UserCommand } from "../structure/UserCommand";
-import { Role } from "../database/Role";
 import { BROWN, toNList } from "../structure/utils";
-import { CustomRole } from "../structure/CustomRole";
 import { BaseArmor } from "../structure/Armor";
 import { BasePet } from "../structure/Pet";
 import { EmbedTemplate } from "../structure/EmbedTemplate";
@@ -16,10 +14,7 @@ export default class extends UserCommand {
   async exec(msg: Message, args: string[]) {
 
     const embed = new EmbedTemplate(msg);
-    const rolesDB = await Role.find({ guildID: msg.guild!.id });
-    const roles = rolesDB.map(role => new CustomRole(msg.guild!, role));
     const items = [
-      ...roles,
       ...BaseArmor.all,
       ...BasePet.all,
       ...Item.all,
@@ -71,14 +66,12 @@ export default class extends UserCommand {
     }
 
 
-    const roleList = toNList(roles.map(x => `${x.role} \`${x.roleDB.price} coins\``));
-    const rpgList = toNList(
-      rpgs.map(x => `${x.name} \`${x.price} coins\``), roles.length + 1);
+    const rpgList = toNList(rpgs.map(x => `${x.name} \`${x.price} coins\``));
 
     const shop = new MessageEmbed()
       .setColor(BROWN)
       .setTitle("Shop")
-      .setDescription(roleList + "\n" + rpgList);
+      .setDescription(rpgList);
 
     msg.channel.send({ embeds: [shop] });
   }

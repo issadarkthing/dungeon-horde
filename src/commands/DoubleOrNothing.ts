@@ -7,6 +7,7 @@ export default class extends UserCommand {
   name = "double-or-nothing";
   aliases = ["don"];
   description = "all in";
+  disable = true;
 
   async exec(msg: Message) {
 

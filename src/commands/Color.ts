@@ -19,7 +19,7 @@ export default class Balance extends UserCommand {
     const user = await this.getUser(msg.author.id);
     const emojis = Object.values(this.colors);
     const embed = new EmbedTemplate(msg);
-    const text = "Please select";
+    const text = "Please select 3 objects";
     const buttons: Button[] = [];
     const [arg1] = args;
     let amount = 10;
