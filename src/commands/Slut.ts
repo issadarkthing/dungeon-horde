@@ -7,6 +7,7 @@ export default class Slut extends UserCommand {
   name = "slut";
   min = 20;
   max = 50;
+  disable = true;
   successRate = 0.65;
   throttle = 20 * 1000; // 20 seconds
   description = "attempt to slut";
