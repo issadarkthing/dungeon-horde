@@ -23,7 +23,6 @@ commandManager.registerCommandOnThrottleHandler((msg, cmd, timeLeft) => {
   msg.channel.send(`You cannot run ${cmd.name} command after ${time} s`);
 });
 
-process.on("uncaughtException", () => {});
 
 client.on("ready", () => {
   console.log(client.user?.username, "is ready!");
@@ -34,7 +33,6 @@ client.on("messageCreate", msg => {
   if (!msg.guild) return;
 
   commandManager.handleMessage(msg);
-
 });
 
 client.login(process.env.BOT_TOKEN);
