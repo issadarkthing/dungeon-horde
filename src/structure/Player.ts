@@ -5,7 +5,6 @@ import { BasePet } from "./Pet";
 import { BaseArmor } from "./Armor";
 import { inlineCode } from "./utils";
 import { Item } from "./Item";
-import { Chicken } from "../structure/Chicken";
 
 export class Player extends PlayerRPG {
   private user: UserDocument;
@@ -92,9 +91,6 @@ export class Player extends PlayerRPG {
 
     profile.addField("Level", inlineCode(this.level), true);
     profile.addField("xp", `\`${this.xp}/${this.requiredXP()}\``, true);
-
-    const chicken = this.inventory.filter(x => x.id === (new Chicken()).id);
-    profile.addField("Chickens", inlineCode(chicken.length), true);
 
     profile.addField("Armor", armor);
     return profile;
