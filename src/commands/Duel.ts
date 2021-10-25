@@ -16,7 +16,7 @@ export default class extends UserCommand {
     const player = await Player.fromMember(msg.member!);
 
     if (!mention) {
-      embed.error("please mention a player");
+      embed.showError("please mention a player");
       return;
     }
 
